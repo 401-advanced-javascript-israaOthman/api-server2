@@ -1,0 +1,31 @@
+{
+  "name": "api-server2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon",
+    "test": "jest --coverage --verbose",
+    "lint": "eslint '**/*.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/401-advanced-javascript-israaOthman/api-server2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/401-advanced-javascript-israaOthman/api-server2/issues"
+  },
+  "homepage": "https://github.com/401-advanced-javascript-israaOthman/api-server2#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "supertest": "^4.0.2"
+  },
+  "devDependencies": {
+    "jest": "^26.0.1"
+  }
+}
