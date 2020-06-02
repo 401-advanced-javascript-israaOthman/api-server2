@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 
-const productMD = require('../lib/models/products/productsCollection');
+const productMD = require('../lib/models/products/proCollection');
 
 //============Routs==========\\
 router.get('/products', getProducts);

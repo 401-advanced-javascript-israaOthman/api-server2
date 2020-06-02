@@ -2,9 +2,9 @@
 
 const express = require('express');
 
-
-const categoryMD = require('../lib/models/categories/categoriesCollection.js');
 const router = express.Router();
+
+const categoryMD = require('../lib/models/categories/catCollection');
 
 //============Routs==========\\
 router.get('/categories', getCategories);
