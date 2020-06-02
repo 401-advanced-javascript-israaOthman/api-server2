@@ -36,7 +36,7 @@ describe('Category Model', () =>{
       });
   });
 
-  it('can get:id() a product', ()=> {
+  it('can get:id() a category', ()=> {
     return cat.read(id)
       .then(results => {
         Object.keys(obj).forEach(key=> {
@@ -45,7 +45,7 @@ describe('Category Model', () =>{
       });
   });
 
-  it('can update() product', ()=> {
+  it('can update() category', ()=> {
     return cat.update(id,obj2)
       .then(result => {
         Object.keys(obj2).forEach(key=> {
@@ -55,7 +55,7 @@ describe('Category Model', () =>{
   });
 
   
-  it('can delete() product', ()=> {
+  it('can delete() category', ()=> {
     return cat.delete(id)
       .then(result => {
         Object.keys(obj2).forEach(key=> {
