@@ -1,8 +1,11 @@
 'use strict';
-
+const supergoose = require('@code-fellows/supergoose');
 const {server} = require('../lib/server');
 const supertest = require('supertest');
 const mockRequest = supertest(server);
+const mockRequest2 = supergoose(server);
+
+
 
 describe('server', ()=>{
   it('should respond with 500', ()=> {
@@ -30,110 +33,82 @@ describe('server', ()=>{
       });
   });
 
-  it('should respond properly /categories', ()=> {
-    return mockRequest
-      .get('/categories')
-      .then(results => {
-        expect(results.status).toBe(200);
-      });
-  });
 
-  it('should respond properly /products', ()=> {
-    return mockRequest
-      .get('/products')
-      .then(results => {
-        expect(results.status).toBe(200);
-      });
-  });
-
-  it('should respond properly /categories/:id', ()=> {
-    return mockRequest
-      .get('/categories/1')
-      .then(results => {
-        expect(results.status).toBe(200);
-      });
-  });
-
-  it('should respond properly /products/:id', ()=> {
-    return mockRequest
-      .get('/products/1')
-      .then(results => {
-        expect(results.status).toBe(200);
-      });
-  });
-
-  it('should post data on categories', ()=> {
-    let record ={
-      'name': 'Drama-Films',
-      'display_name': 'Drama',
-      'description': 'The latest Drama films',
+  it('it can get() product ', ()=> {
+    let obj = {
+      'name': 'test',
+      'category' : 'test cat',
+      'display_name': 'testttt',
+      'description': 'The latest tests',
     };
-    return mockRequest
-      .post('/categories')
-      .send(record)
-      .then(results => {
-        expect(results.status).toBe(200);
-      });
-  });
-
-  it('should post data on products', ()=> {
-    let record ={
-      'category': 1,
-      'name': 'Avengers EndGame',
-      'display_name': 'Marvel',
-      'description': 'The last Avengers movie',
-      
-    };
-    return mockRequest
+    return mockRequest2
       .post('/products')
-      .send(record)
-      .then(results => {
-        expect(results.status).toBe(200);
+      .send(obj)
+      .then(data => {
+        return mockRequest2.get('/products')
+          .then(result => {
+            Object.keys(obj).forEach(key=> {
+              expect(result.body[0][key]).toEqual(obj[key]);
+            });
+          });
       });
   });
 
-  it('should update specific data on /categories/:id', ()=> {
-    let record ={
-      'name': 'Drama-Films',
-      'display_name': 'Drama',
-      'description': 'The latest Drama films',
+  it('it can post() product ', ()=> {
+    let obj = {
+      'name': 'test',
+      'category' : 'test cat',
+      'display_name': 'testttt',
+      'description': 'The latest tests',
     };
-    return mockRequest
-      .put('/categories/1')
-      .send(record)
-      .then(results => {
-        expect(results.status).toBe(200);
+    return mockRequest2
+      .post('/products')
+      .send(obj)
+      .then(data => {
+        expect(data.status).toBe(201);
+        Object.keys(obj).forEach(key=> {
+          expect(data.body[key]).toEqual(obj[key]);
+        });
+        
       });
   });
 
-  it('should update specific data on /products/:id', ()=> {
-    let record ={
-      'category': 1,
-      'name': 'Avengers EndGame',
-      'display_name': 'Marvel',
-      'description': 'The last Avengers movie',
+
+  it('it can get() category ', ()=> {
+    let obj = {
+      'name': 'test',
+      'display_name': 'testttt',
+      'description': 'The latest tests',
     };
-    return mockRequest
-      .put('/products/1')
-      .send(record)
-      .then(results => {
-        expect(results.status).toBe(200);
+    return mockRequest2
+      .post('/api/v1/categories') 
+      .send(obj)
+      .then(data => {
+        return mockRequest2.get('/api/v1/categories')
+          .then(result => {
+            Object.keys(obj).forEach(key=> {
+              expect(result.body[0][key]).toEqual(obj[key]);
+            });
+          });
       });
   });
 
-  it('should delete specific data on /categories/:id', ()=> {
-    return mockRequest
-      .delete('/categories/1')
-      .then(results => {
-        expect(results.status).toBe(200);
-      });
-  });
-
-  it('should delete specific data on /products/:id', ()=> {
-    return mockRequest
-      .delete('/products/1')
-      .then(results => {
-        expect(results.status).toBe(200);
+  it('it can post() category ', ()=> {
+    let obj = {
+      'name': 'test',
+      'display_name': 'testttt',
+      'description': 'The latest tests',
+    };
+    return mockRequest2
+      .post('/api/v1/categories')
+      .send(obj)
+      .then(data => {
+        console.log(data.body);
+        expect(data.status).toBe(201);
+        Object.keys(obj).forEach(key=> {
+          expect(data.body[key]).toEqual(obj[key]);
+        });
+        
       });
   });
 
