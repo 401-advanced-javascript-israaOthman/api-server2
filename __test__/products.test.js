@@ -1,7 +1,7 @@
 'use strict';
 const supergoose = require('@code-fellows/supergoose');
 
-const pro = require('../lib/models/products/proCollection');
+const pro = require('../lib/models/products/products');
 
 let obj =     {
   'name': 'test',

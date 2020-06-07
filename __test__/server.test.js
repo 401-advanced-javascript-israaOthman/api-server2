@@ -42,13 +42,13 @@ describe('server', ()=>{
       'description': 'The latest tests',
     };
     return mockRequest2
-      .post('/products')
+      .post('/api/v1/products')
       .send(obj)
       .then(data => {
-        return mockRequest2.get('/products')
-          .then(result => {
+        return mockRequest2.get('/api/v1/products')
+          .then(dataa => {
             Object.keys(obj).forEach(key=> {
-              expect(result.body[0][key]).toEqual(obj[key]);
+              expect(dataa.body.result[0][key]).toEqual(obj[key]);
             });
           });
       });
@@ -62,7 +62,7 @@ describe('server', ()=>{
       'description': 'The latest tests',
     };
     return mockRequest2
-      .post('/products')
+      .post('/api/v1/products')
       .send(obj)
       .then(data => {
         expect(data.status).toBe(201);
@@ -85,9 +85,9 @@ describe('server', ()=>{
       .send(obj)
       .then(data => {
         return mockRequest2.get('/api/v1/categories')
-          .then(result => {
+          .then(dataa => {
             Object.keys(obj).forEach(key=> {
-              expect(result.body[0][key]).toEqual(obj[key]);
+              expect(dataa.body.result[0][key]).toEqual(obj[key]);
             });
           });
       });
