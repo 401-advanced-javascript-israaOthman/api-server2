@@ -6,6 +6,7 @@ function getModel(req, res, next) {
   switch(model) {
   case 'categories':
   case 'products':
+  case 'todo':
     req.model = md;
     next();
     return;
